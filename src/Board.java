@@ -136,6 +136,15 @@ public class Board {
         return cost;
     }
 
+    public int xDistance(Coordinate finish, Coordinate next){
+        return Math.abs(finish.columnloc - next.columnloc);
+    }
+
+    public int yDistance(Coordinate finish, Coordinate next){
+        return Math.abs(finish.rowloc - next.rowloc);
+    }
+
+
     /**
      * Calculate the heuristic value
      * @param heuristic The heuristic

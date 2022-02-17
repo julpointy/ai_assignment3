@@ -55,8 +55,8 @@ public class AStar {
             // Loop through the possible next moves
             for (int i = 0; i < moves.size(); i++) {
                 Coordinate next = moves.get(i);
-                next.setPath(currLocation.path + "\n" + next.move.toString());
                 int newCost = costSoFar.get(currLocation) + b.getCost(currLocation, next);
+                next.setPath(currLocation.path + "\n" + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost);
                 if (!costSoFar.containsKey(next) || newCost < costSoFar.get(next)) {
                     costSoFar.put(next, newCost);
                     int priority = newCost + b.calculateHeuristic(heuristic, finish, next);
