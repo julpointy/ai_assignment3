@@ -36,9 +36,10 @@ public class Main {
 
         String filename = args[1];
 
+        File CSV = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\Output\\Output.csv");
 
-        for(int l = 0; l < 1; l++){
-            Tester test = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic);
+        for(int l = 0; l < 100; l++){
+            Tester test = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic, CSV);
             System.out.println(l);
         }
     }

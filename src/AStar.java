@@ -1,4 +1,9 @@
 import javafx.util.Pair;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -11,7 +16,7 @@ public class AStar {
      * @param b The board being used
      * @param heuristic The heuristic value being used
      */
-    public void astar(Coordinate start, Coordinate finish, Board b, int heuristic) {
+    public void astar(Coordinate start, Coordinate finish, Board b, int heuristic, File CSV) {
         // Create a priority queue for the frontier and add the starting location to it
         PriorityQueue<Pair<Coordinate, Integer>> frontier = new PriorityQueue<>((x, y) -> x.getValue() - y.getValue());
         frontier.add(new Pair(start, 0));
@@ -46,7 +51,7 @@ public class AStar {
                 System.out.println("Nodes Expanded: " + nodesExpanded);
                 System.out.println("Series of Actions:");
                 System.out.println(currLocation.path.trim());
-                this.pathToCSV(currLocation.path);
+                this.pathToCSV(currLocation.path, CSV);
                 break;
             }
 
@@ -68,7 +73,7 @@ public class AStar {
         }
     }
 
-    public void pathToCSV(String path){
+    public void pathToCSV(String path, File CSV){
         path.trim();
         String[] splitString = path.split("\n");
         String[][] splitString2 = new String[splitString.length][4];
@@ -81,19 +86,38 @@ public class AStar {
                 s2int++;
             }
         }
-        String[][] finalStringSplit = new String[splitString.length][4];
+        String[][] finalStringSplit = new String[splitString.length][3];
         int j = splitString.length;
         for (int i = 0; i < splitString.length; i++) {
-            finalStringSplit[j - 1][3] = splitString2[i][3];
+            finalStringSplit[j - 1][2] = splitString2[i][3];
             j = j - 1;
-            finalStringSplit[i][2] = splitString2[i][2];
-            finalStringSplit[i][1] = splitString2[i][1];
-            finalStringSplit[i][0] = splitString2[i][0];
+            finalStringSplit[i][1] = splitString2[i][2];
+            finalStringSplit[i][0] = splitString2[i][1];
         }
-        for(String[] s : finalStringSplit){
-            for(String s1: s){
-                System.out.println(s1);
+
+        try {
+            FileWriter outputFile = new FileWriter(CSV, true);
+
+            BufferedWriter out = new BufferedWriter(outputFile);
+
+            for(String[] s : finalStringSplit){
+                for(String s1 : s){
+                    out.write(s1);
+                    out.append(",");
+                }
+                out.newLine();
             }
+            out.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+//        for(String[] s : finalStringSplit){
+//            for(String s1: s){
+//                System.out.println(s1);
+//            }
+//        }
     }
 }

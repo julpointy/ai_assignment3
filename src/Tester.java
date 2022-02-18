@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Tester {
-    public Tester(int boardwidth, int boardheight, String Filename1, Coordinate start, Coordinate goal, int currHeuristic) {
+    public Tester(int boardwidth, int boardheight, String Filename1, Coordinate start, Coordinate goal, int currHeuristic, File CSV) {
 
         try {
             BoardGenerator test = new BoardGenerator();
@@ -76,7 +76,7 @@ public class Tester {
         //We pass into the A* algorithm the board, the goal and start coordinate, and the heuristic that it will make decisions off of
         long startTime = System.nanoTime();
         AStar aStar = new AStar();
-        aStar.astar(start, goal, board, currHeuristic);
+        aStar.astar(start, goal, board, currHeuristic, CSV);
         long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1000000000;
         System.out.println(elapsedTime);
