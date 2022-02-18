@@ -57,7 +57,7 @@ public class AStar {
             for (int i = 0; i < moves.size(); i++) {
                 Coordinate next = moves.get(i);
                 int newCost = costSoFar.get(currLocation) + b.getCost(currLocation, next);
-                next.setPath(currLocation.path + "\n" + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost);
+                next.setPath(currLocation.path + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost + "\n");
                 if (!costSoFar.containsKey(next) || newCost < costSoFar.get(next)) {
                     costSoFar.put(next, newCost);
                     int priority = newCost + b.calculateHeuristic(heuristic, finish, next);
@@ -69,10 +69,31 @@ public class AStar {
     }
 
     public void pathToCSV(String path){
+        path.trim();
         String[] splitString = path.split("\n");
-        for(String s: splitString){
-            System.out.println(s);
+        String[][] splitString2 = new String[splitString.length][4];
+        for(int i = 0; i < splitString.length; i++){
+            String newSplit = splitString[i];
+            String[] newString = newSplit.split(" ");
+            int s2int = 0;
+            for(String s2 : newString){
+                splitString2[i][s2int] = s2;
+                s2int++;
+            }
+        }
+        String[][] finalStringSplit = new String[splitString.length][4];
+        int j = splitString.length;
+        for (int i = 0; i < splitString.length; i++) {
+            finalStringSplit[j - 1][3] = splitString2[i][3];
+            j = j - 1;
+            finalStringSplit[i][2] = splitString2[i][2];
+            finalStringSplit[i][1] = splitString2[i][1];
+            finalStringSplit[i][0] = splitString2[i][0];
+        }
+        for(String[] s : finalStringSplit){
+            for(String s1: s){
+                System.out.println(s1);
+            }
         }
     }
-
 }

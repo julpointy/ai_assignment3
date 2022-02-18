@@ -16,7 +16,7 @@ public class Tester {
         String Filename = Filename1;
         try {
 
-            File myObj = new File("C:\\Users\\Josh\\IdeaProjects\\CS4341-Project-3\\src\\Boards\\8x8boards\\" + Filename);
+            File myObj = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\boards\\" + Filename);
             Scanner myReader = new Scanner(myObj);
             int i = 0;
             //while the file is open, we parse through it to calculate the board size
@@ -39,7 +39,7 @@ public class Tester {
         //We reopen the file to collect the values at each board space to place in a 2x2 array
         Board board = new Board(boardheight, boardwidth);
         try {
-            File myObj = new File("C:\\Users\\Josh\\IdeaProjects\\CS4341-Project-3\\src\\Boards\\8x8boards\\" + Filename);
+            File myObj = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\boards\\" + Filename);
             Scanner myReader = new Scanner(myObj);
             int i = 0;
             while (myReader.hasNextLine()) {
