@@ -39,7 +39,7 @@ public class Main {
 
 
 
-        for(int l = 0; l < 20; l++){
+        for(int l = 0; l < 1; l++){
             Tester test = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic);
             System.out.println(l);
         }

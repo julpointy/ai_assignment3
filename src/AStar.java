@@ -46,6 +46,7 @@ public class AStar {
                 System.out.println("Nodes Expanded: " + nodesExpanded);
                 System.out.println("Series of Actions:");
                 System.out.println(currLocation.path.trim());
+                this.pathToCSV(currLocation.path);
                 break;
             }
 
@@ -66,4 +67,12 @@ public class AStar {
             }
         }
     }
+
+    public void pathToCSV(String path){
+        String[] splitString = path.split("\n");
+        for(String s: splitString){
+            System.out.println(s);
+        }
+    }
+
 }
