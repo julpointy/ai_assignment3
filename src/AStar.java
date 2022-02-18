@@ -62,7 +62,7 @@ public class AStar {
             for (int i = 0; i < moves.size(); i++) {
                 Coordinate next = moves.get(i);
                 int newCost = costSoFar.get(currLocation) + b.getCost(currLocation, next);
-                next.setPath(currLocation.path + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost + "\n");
+                next.setPath(currLocation.path + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost + " " + b.calculateHeuristic(5,finish,next) + " " + b.minTurns(next,finish) +"\n");
                 if (!costSoFar.containsKey(next) || newCost < costSoFar.get(next)) {
                     costSoFar.put(next, newCost);
                     int priority = newCost + b.calculateHeuristic(heuristic, finish, next);
@@ -76,7 +76,7 @@ public class AStar {
     public void pathToCSV(String path, File CSV){
         path.trim();
         String[] splitString = path.split("\n");
-        String[][] splitString2 = new String[splitString.length][4];
+        String[][] splitString2 = new String[splitString.length][6];
         for(int i = 0; i < splitString.length; i++){
             String newSplit = splitString[i];
             String[] newString = newSplit.split(" ");
@@ -86,13 +86,15 @@ public class AStar {
                 s2int++;
             }
         }
-        String[][] finalStringSplit = new String[splitString.length][3];
+        String[][] finalStringSplit = new String[splitString.length][5];
         int j = splitString.length;
         for (int i = 0; i < splitString.length; i++) {
-            finalStringSplit[j - 1][2] = splitString2[i][3];
+            finalStringSplit[j - 1][4] = splitString2[i][3];
             j = j - 1;
-            finalStringSplit[i][1] = splitString2[i][2];
             finalStringSplit[i][0] = splitString2[i][1];
+            finalStringSplit[i][1] = splitString2[i][2];
+            finalStringSplit[i][2] = splitString2[i][5];
+            finalStringSplit[i][3] = splitString2[i][4];
         }
 
         try {

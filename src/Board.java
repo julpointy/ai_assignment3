@@ -145,6 +145,87 @@ public class Board {
     }
 
 
+    public int minTurns(Coordinate next, Coordinate finish){
+        int totalCost = 0;
+        int newVertical5 = finish.rowloc - next.rowloc;
+        int newHorizontal5 = finish.columnloc - next.columnloc;
+
+        if ((newVertical5 == 0) && (newHorizontal5 > 0)) {
+            switch (next.dir) {
+                case N:
+                case S:
+                    totalCost += 1;
+                    break;
+                case E:
+                    break;
+                case W:
+                    totalCost += 2;
+                    break;
+            }
+        } else if ((newVertical5 == 0) && (newHorizontal5 < 0)) {
+            switch (next.dir) {
+                case N:
+                case S:
+                    totalCost += 1;
+                    break;
+                case E:
+                    totalCost += 2;
+                    break;
+                case W:
+                    break;
+            }
+        } else if ((newVertical5 < 0) && (newHorizontal5 == 0)) {
+            switch (next.dir) {
+                case N:
+                    break;
+                case S:
+                    totalCost += 2;
+                    break;
+                case E:
+                case W:
+                    totalCost += 1;
+                    break;
+            }
+        } else if ((newVertical5 > 0) && (newHorizontal5 == 0)) {
+            switch (next.dir) {
+                case N:
+                    totalCost += 2;
+                    break;
+                case S:
+                    break;
+                case E:
+                case W:
+                    totalCost += 1;
+                    break;
+            }
+        } else if (newVertical5 > 0) {
+            switch (next.dir) {
+                case N:
+                    totalCost += 2;
+                    break;
+                case S:
+                    break;
+                case E:
+                case W:
+                    totalCost += 1;
+                    break;
+            }
+        } else if (newVertical5 < 0) {
+            switch (next.dir) {
+                case N:
+                    break;
+                case S:
+                    totalCost += 2;
+                    break;
+                case E:
+                case W:
+                    totalCost += 1;
+                    break;
+            }
+        }
+        return totalCost;
+    }
+
     /**
      * Calculate the heuristic value
      * @param heuristic The heuristic

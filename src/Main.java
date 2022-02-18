@@ -38,7 +38,7 @@ public class Main {
 
         File CSV = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\Output\\Output.csv");
 
-        for(int l = 0; l < 100; l++){
+        for(int l = 0; l < 500; l++){
             Tester test = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic, CSV);
             System.out.println(l);
         }
