@@ -25,10 +25,9 @@ public class BoardGenerator {
             }
             builder.append("\n");//append new line at the end of the row
 
-
             BufferedWriter writer = null;
             try {
-                writer = new BufferedWriter(new FileWriter("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\boards\\board.txt"));
+                writer = new BufferedWriter(new FileWriter("C:\\Users\\Josh\\IdeaProjects\\ai_assignment3\\src\\Boards\\board.txt"));
                 writer.write(builder.toString());//save the string representation of the board
                 writer.close();
             } catch (IOException e) {
@@ -47,10 +46,21 @@ public class BoardGenerator {
             }
         }
 
-        array[x-2][1] = "S";
-        array[1][y-2] = "G";
+        int randomXNum = ThreadLocalRandom.current().nextInt(1, x);
+        int randomYNum = ThreadLocalRandom.current().nextInt(1, y);
+
+        int randomXNum2 = ThreadLocalRandom.current().nextInt(1, x);
+        int randomYNum2 = ThreadLocalRandom.current().nextInt(1, x);
+
+        array[randomXNum][randomYNum] = "G";
+
+        while(randomXNum == randomXNum2 && randomYNum == randomYNum2){
+            randomXNum2 = ThreadLocalRandom.current().nextInt(1, x);
+            randomYNum2 = ThreadLocalRandom.current().nextInt(1, x);
+        }
+
+        array[randomXNum2][randomYNum2] = "S";
 
         return array;
-
     }
 }

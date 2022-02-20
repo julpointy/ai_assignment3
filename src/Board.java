@@ -144,6 +144,77 @@ public class Board {
         return Math.abs(finish.rowloc - next.rowloc);
     }
 
+    public int goalEnterCost(Coordinate next, Coordinate finish){
+        int enterCost = 0;
+        int verticalDifference = finish.rowloc - next.rowloc;
+        int horizontalDifference = finish.columnloc - next.columnloc;
+
+        if(verticalDifference == 0){
+            if(horizontalDifference > 0){
+                //enter from west
+                int finishCol = finish.columnloc;
+                int finishRow = finish.rowloc;
+                finishCol--;
+                enterCost = board[finishRow][finishCol];
+            }
+            else if(horizontalDifference < 0){
+                //enter from east
+                int finishCol = finish.columnloc;
+                int finishRow = finish.rowloc;
+                finishCol++;
+                enterCost = board[finishRow][finishCol];
+            }
+        }
+        if(horizontalDifference == 0){
+            if(verticalDifference > 0){
+                //enter from south
+                int finishCol = finish.columnloc;
+                int finishRow = finish.rowloc;
+                finishRow--;
+                enterCost = board[finishRow][finishCol];
+            }
+            else if(verticalDifference < 0){
+                //enter from north
+                int finishCol = finish.columnloc;
+                int finishRow = finish.rowloc;
+                finishRow++;
+                enterCost = board[finishRow][finishCol];
+            }
+        }
+        if(verticalDifference < 0 && horizontalDifference > 0){
+            int finishCol = finish.columnloc;
+            int finishRow = finish.rowloc;
+
+            int cost1 = board[finishRow + 1][finishCol];
+            int cost2 = board[finishRow][finishCol - 1];
+            enterCost = (cost1 + cost2)/2;
+        }
+        if(verticalDifference > 0 && horizontalDifference > 0){
+            int finishCol = finish.columnloc;
+            int finishRow = finish.rowloc;
+
+            int cost1 = board[finishRow - 1][finishCol];
+            int cost2 = board[finishRow][finishCol - 1];
+            enterCost = (cost1 + cost2)/2;
+        }
+        if(verticalDifference > 0 && horizontalDifference < 0){
+            int finishCol = finish.columnloc;
+            int finishRow = finish.rowloc;
+
+            int cost1 = board[finishRow - 1][finishCol];
+            int cost2 = board[finishRow][finishCol + 1];
+            enterCost = (cost1 + cost2)/2;
+        }
+        if(verticalDifference < 0 && horizontalDifference < 0){
+            int finishCol = finish.columnloc;
+            int finishRow = finish.rowloc;
+
+            int cost1 = board[finishRow + 1][finishCol];
+            int cost2 = board[finishRow][finishCol + 1];
+            enterCost = (cost1 + cost2)/2;
+        }
+        return enterCost;
+    }
 
     public int minTurns(Coordinate next, Coordinate finish){
         int totalCost = 0;
