@@ -4,6 +4,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BoardGenerator {
 
+    /**
+     * method that generates a board of size lengthOfArray and widthOfArray
+     * @throws IOException IO exception that is possible due to writing to a file
+     */
     public BoardGenerator() throws IOException {
         int lengthOfArray = 8;
         int widthOfArray = 8;
@@ -37,16 +41,23 @@ public class BoardGenerator {
 
     }
 
+    /**
+     * helper function that generates an array of fixed size with random ints from 1-9
+     * @param x length of array
+     * @param y width of array
+     * @return return the 2D array
+     * @throws IOException exception from writing to a file
+     */
     public String[][] generate2DArray(int x, int y) throws IOException {
-        String[][] array = new String[x][y];
-        for (int i = 0; i < array.length; i++) {
+        String[][] array = new String[x][y]; // initialize array of size x and y
+        for (int i = 0; i < array.length; i++) { // loop through each location in array
             for (int j = 0; j < array.length; j++) {
-                int randomNum = ThreadLocalRandom.current().nextInt(1, 10);
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 10);//generate a random int for each location
                 array[i][j] = (Integer.toString(randomNum));
             }
         }
 
-        int randomXNum = ThreadLocalRandom.current().nextInt(1, x);
+        int randomXNum = ThreadLocalRandom.current().nextInt(1, x); // generate a random location for start and finish
         int randomYNum = ThreadLocalRandom.current().nextInt(1, y);
 
         int randomXNum2 = ThreadLocalRandom.current().nextInt(1, x);

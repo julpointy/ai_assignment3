@@ -73,54 +73,53 @@ public class AStar {
         }
     }
 
+
+    /**
+     * Method which takes a string path, and a file and writes the data from that string to the CSV file that it is given
+     * @param path of the A* algorithm. Represented as a string that also holds the xDistance to goal, yDistance to goal, real cost, as well as other values
+     * @param CSV CSV file that we are writing the data to
+     */
     public void pathToCSV(String path, File CSV){
-        path.trim();
-        String[] splitString = path.split("\n");
-        String[][] splitString2 = new String[splitString.length][7];
-        for(int i = 0; i < splitString.length; i++){
+        path.trim();  // trim the string to remove newlines or spaces at the front or end of the string
+        String[] splitString = path.split("\n"); // split the string by newlines (each move is a newline)
+        String[][] splitString2 = new String[splitString.length][7]; //create a 2d array to split each move into storing its own data within a different array node
+        for(int i = 0; i < splitString.length; i++){  // loop through the string array
             String newSplit = splitString[i];
-            String[] newString = newSplit.split(" ");
+            String[] newString = newSplit.split(" ");  // split the string array into another delimited array of strings
             int s2int = 0;
-            for(String s2 : newString){
+            for(String s2 : newString){   // store the array in a 2d array
                 splitString2[i][s2int] = s2;
                 s2int++;
             }
         }
-        String[][] finalStringSplit = new String[splitString.length][6];
+        String[][] finalStringSplit = new String[splitString.length][6];  // take the delimited strings and only keep what we want to write to the CSV file
         int j = splitString.length;
         for (int i = 0; i < splitString.length; i++) {
-            finalStringSplit[j - 1][5] = splitString2[i][3];
+            finalStringSplit[j - 1][5] = splitString2[i][3];   // actual cost
             j = j - 1;
-            finalStringSplit[i][0] = splitString2[i][1];
-            finalStringSplit[i][1] = splitString2[i][2];
-            finalStringSplit[i][2] = splitString2[i][5];
-            finalStringSplit[i][3] = splitString2[i][4];
-            finalStringSplit[i][4] = splitString2[i][6];
+            finalStringSplit[i][0] = splitString2[i][1];  // xDistance
+            finalStringSplit[i][1] = splitString2[i][2];  // yDistance
+            finalStringSplit[i][2] = splitString2[i][5];  // number of turns
+            finalStringSplit[i][3] = splitString2[i][4];  // heuristic 5 estimate
+            finalStringSplit[i][4] = splitString2[i][6];  // goal entrance cost
         }
 
-        try {
+        try {   // try to open file and append to it
             FileWriter outputFile = new FileWriter(CSV, true);
 
             BufferedWriter out = new BufferedWriter(outputFile);
 
-            for(String[] s : finalStringSplit){
+            for(String[] s : finalStringSplit){ // write data from array to file
                 for(String s1 : s){
                     out.write(s1);
                     out.append(",");
                 }
                 out.newLine();
             }
-            out.close();
+            out.close();  // close the file
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-//        for(String[] s : finalStringSplit){
-//            for(String s1: s){
-//                System.out.println(s1);
-//            }
-//        }
     }
 }

@@ -136,58 +136,77 @@ public class Board {
         return cost;
     }
 
+    /**
+     * method that calculates the xDistance from the current coordinate to the goal
+     * @param finish the coordinate for the goal
+     * @param next the current coordinate (place where the robot currently is)
+     * @return returns an int which is how far the robot is from the goal
+     */
     public int xDistance(Coordinate finish, Coordinate next){
         return Math.abs(finish.columnloc - next.columnloc);
     }
 
+    /**
+     * method that calculates the yDistance from the current coordinate to the goal
+     * @param finish the coordinate for the goal
+     * @param next the current coordinate (place where the robot currently is)
+     * @return returns an int which is how far the robot is from the goal
+     */
     public int yDistance(Coordinate finish, Coordinate next){
         return Math.abs(finish.rowloc - next.rowloc);
     }
 
+    /**
+     * method that returns the cost of the move to enter the goal piece
+     * if the robot is approaching from 2 sides (at an angle) it will take the average of the two possible entrances
+     * @param next the current coordinate that the robot is in
+     * @param finish the goal coordinate
+     * @return returns the cost to enter the goal
+     */
     public int goalEnterCost(Coordinate next, Coordinate finish){
-        int enterCost = 0;
-        int verticalDifference = finish.rowloc - next.rowloc;
-        int horizontalDifference = finish.columnloc - next.columnloc;
+        int enterCost = 0; // initializes the return variable
+        int verticalDifference = finish.rowloc - next.rowloc;  // calculates the vertical distance to the goal
+        int horizontalDifference = finish.columnloc - next.columnloc;  //calculates the horizontal distance to the goal
 
-        if(verticalDifference == 0){
-            if(horizontalDifference > 0){
+        if(verticalDifference == 0){  //if the robot is appraching from directly above
+            if(horizontalDifference > 0){   //check if robot is below goal
                 //enter from west
                 int finishCol = finish.columnloc;
                 int finishRow = finish.rowloc;
                 finishCol--;
-                enterCost = board[finishRow][finishCol];
+                enterCost = board[finishRow][finishCol];  // cost is to enter the goal from the south coordinate
             }
-            else if(horizontalDifference < 0){
+            else if(horizontalDifference < 0){ // check if robot is above goal
                 //enter from east
                 int finishCol = finish.columnloc;
                 int finishRow = finish.rowloc;
                 finishCol++;
-                enterCost = board[finishRow][finishCol];
+                enterCost = board[finishRow][finishCol];  // cost is to enter the goal from the north coordinate
             }
         }
-        if(horizontalDifference == 0){
-            if(verticalDifference > 0){
+        if(horizontalDifference == 0){ // check if the robot is approaching from left or right
+            if(verticalDifference > 0){  // if left, cost is west coordinate from goal
                 //enter from south
                 int finishCol = finish.columnloc;
                 int finishRow = finish.rowloc;
                 finishRow--;
-                enterCost = board[finishRow][finishCol];
+                enterCost = board[finishRow][finishCol];  //left cost
             }
-            else if(verticalDifference < 0){
+            else if(verticalDifference < 0){ // if right approach
                 //enter from north
                 int finishCol = finish.columnloc;
                 int finishRow = finish.rowloc;
                 finishRow++;
-                enterCost = board[finishRow][finishCol];
+                enterCost = board[finishRow][finishCol]; //cost of the east coordinate from goal
             }
         }
-        if(verticalDifference < 0 && horizontalDifference > 0){
+        if(verticalDifference < 0 && horizontalDifference > 0){ // check if approaching from 1 of 4 quadrants from the goal
             int finishCol = finish.columnloc;
             int finishRow = finish.rowloc;
 
             int cost1 = board[finishRow + 1][finishCol];
             int cost2 = board[finishRow][finishCol - 1];
-            enterCost = (cost1 + cost2)/2;
+            enterCost = (cost1 + cost2)/2;  //average the two values
         }
         if(verticalDifference > 0 && horizontalDifference > 0){
             int finishCol = finish.columnloc;
@@ -216,24 +235,30 @@ public class Board {
         return enterCost;
     }
 
+    /**
+     * method to calculate the minimum amount of turns needed to get to the goal
+     * @param next current coordinate the robot is at
+     * @param finish the goal coordinate
+     * @return the number of turns
+     */
     public int minTurns(Coordinate next, Coordinate finish){
         int totalCost = 0;
         int newVertical5 = finish.rowloc - next.rowloc;
         int newHorizontal5 = finish.columnloc - next.columnloc;
 
-        if ((newVertical5 == 0) && (newHorizontal5 > 0)) {
+        if ((newVertical5 == 0) && (newHorizontal5 > 0)) { // checks if the robot is directly left or right to goal with no vertical difference
             switch (next.dir) {
                 case N:
                 case S:
-                    totalCost += 1;
+                    totalCost += 1;  //if facing up, only needs to turn once
                     break;
-                case E:
+                case E: // if facing the right way, no turns
                     break;
-                case W:
+                case W:  // if facing the opposite way, 2 turns
                     totalCost += 2;
                     break;
             }
-        } else if ((newVertical5 == 0) && (newHorizontal5 < 0)) {
+        } else if ((newVertical5 == 0) && (newHorizontal5 < 0)) { // same as above, other case however
             switch (next.dir) {
                 case N:
                 case S:
