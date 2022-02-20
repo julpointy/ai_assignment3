@@ -44,15 +44,15 @@ AStar {
             if(currLocation.equals(finish)) {
                 // Print the score of the path found, the number of actions required to reach the
                 // goal, the number of nodes expanded, and the series of actions
-                //System.out.print("Score of the path found: ");
-                System.out.print(100 - costSoFar.get(currLocation) + "\t");
+                System.out.print("Score of the path found: ");
+                System.out.print(100 - costSoFar.get(currLocation) + "\n");
                 String[] movesMade = currLocation.path.split("\n");
                 int movesTaken = movesMade.length - 1;
-                System.out.print(movesTaken + "\t");
-                System.out.print(nodesExpanded + "\t");
-                //System.out.println("Series of Actions:");
-                //System.out.println(currLocation.path.trim());
-                this.pathToCSV(currLocation.path, CSV);
+                System.out.println("Actions taken: " + movesTaken);
+                System.out.println("Nodes expanded: " + nodesExpanded);
+                System.out.println("Series of Actions:");
+                System.out.println(currLocation.path.trim());
+//                this.pathToCSV(currLocation.path, CSV);
                 break;
             }
 
@@ -63,7 +63,8 @@ AStar {
             for (int i = 0; i < moves.size(); i++) {
                 Coordinate next = moves.get(i);
                 int newCost = costSoFar.get(currLocation) + b.getCost(currLocation, next);
-                next.setPath(currLocation.path + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost + " " + b.calculateHeuristic(5,finish,next) + " " + b.minTurns(next,finish) + " " + b.goalEnterCost(next, finish) + "\n");
+                next.setPath(currLocation.path + next.move.toString() + "\n");
+//                next.setPath(currLocation.path + next.move.toString() + " " + b.xDistance(finish, next) + " " + b.yDistance(finish,next)+ " " + newCost + " " + b.calculateHeuristic(5,finish,next) + " " + b.minTurns(next,finish) + " " + b.goalEnterCost(next, finish) + "\n");
                 if (!costSoFar.containsKey(next) || newCost < costSoFar.get(next)) {
                     costSoFar.put(next, newCost);
                     int priority = newCost + b.calculateHeuristic(heuristic, finish, next);

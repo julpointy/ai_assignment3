@@ -38,7 +38,7 @@ public class Main {
 
         File CSV = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\Output\\Output.csv"); // generate a CSV file to store collected data for machine learning
 
-        for(int l = 0; l < 10; l++){ //run the algorithm with random board for L times
+        for(int l = 0; l < 1; l++){ //run the algorithm with random board for L times
 
             try {
                 BoardGenerator test = new BoardGenerator();
@@ -46,11 +46,11 @@ public class Main {
                 e.printStackTrace();
             }
 
-            Tester test1 = new Tester(boardwidth, boardheight, filename, start, goal, 5, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
-            Tester test2 = new Tester(boardwidth, boardheight, filename, start, goal, 6, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
-            Tester test3 = new Tester(boardwidth, boardheight, filename, start, goal, 7, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
-
-            System.out.println("~~~~~~~~~~~~~~~~~");
+            Tester test1 = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
+//            Tester test2 = new Tester(boardwidth, boardheight, filename, start, goal, 6, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
+//            Tester test3 = new Tester(boardwidth, boardheight, filename, start, goal, 7, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
+//
+//            System.out.println("~~~~~~~~~~~~~~~~~");
 
             //System.out.println(l); // print out which board out of l it completed
         }
