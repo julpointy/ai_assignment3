@@ -427,6 +427,10 @@ public class Board {
                 }
                 totalCost += (vertical + horizontal);
                 break;
+            case 7:
+                double calcCost = 1.4086*vertical + 1.4119*horizontal + .1336*goalEnterCost(next, finish) + 1.2797*minTurns(next, finish) + 1.1605;
+                totalCost = (int) calcCost;
+                break;
         }
         if (heuristic == 6) {
             totalCost = (totalCost * 3);

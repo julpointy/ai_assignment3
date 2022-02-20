@@ -36,7 +36,7 @@ public class Main {
 
         String filename = args[1]; // pull the filename from the second argument
 
-        File CSV = new File("C:\\Users\\Josh\\IdeaProjects\\ai_assignment3\\src\\Output\\Output.csv"); // generate a CSV file to store collected data for machine learning
+        File CSV = new File("C:\\Users\\julpo\\Documents\\GitHub\\ai_assignment3\\src\\Output\\Output.csv"); // generate a CSV file to store collected data for machine learning
 
         for(int l = 0; l < 1000; l++){ //run the algorithm with random board for L times
             Tester test = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever

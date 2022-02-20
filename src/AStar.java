@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class AStar {
+public class
+AStar {
     /**
      * Find the path between the start and finish locations on the given board using the given heuristic
      * @param start The location of the start position

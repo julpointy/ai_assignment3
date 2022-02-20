@@ -31,7 +31,7 @@ public class BoardGenerator {
 
             BufferedWriter writer = null;
             try {
-                writer = new BufferedWriter(new FileWriter("C:\\Users\\Josh\\IdeaProjects\\ai_assignment3\\src\\Boards\\board.txt"));
+                writer = new BufferedWriter(new FileWriter("C:\\Users\\julpo\\Documents\\GitHub\\ai_assignment3\\src\\Boards\\board.txt"));
                 writer.write(builder.toString());//save the string representation of the board
                 writer.close();
             } catch (IOException e) {
