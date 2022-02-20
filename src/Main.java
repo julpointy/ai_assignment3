@@ -40,7 +40,7 @@ public class Main {
 
         for(int l = 0; l < 1000; l++){ //run the algorithm with random board for L times
             Tester test = new Tester(boardwidth, boardheight, filename, start, goal, currHeuristic, CSV); //helper class that holds the board generation, algorithm call, and whatnot to allow for garbage collector to remove it after a few loops and not exist in main forever
-            System.out.println(l); // print out which board out of l it completed
+            //System.out.println(l); // print out which board out of l it completed
         }
     }
 }

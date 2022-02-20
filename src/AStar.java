@@ -44,12 +44,12 @@ AStar {
             if(currLocation.equals(finish)) {
                 // Print the score of the path found, the number of actions required to reach the
                 // goal, the number of nodes expanded, and the series of actions
-                System.out.print("Score of the path found: ");
-                System.out.println(100 - costSoFar.get(currLocation));
+                //System.out.print("Score of the path found: ");
+                System.out.print(100 - costSoFar.get(currLocation) + "\t");
                 String[] movesMade = currLocation.path.split("\n");
                 int movesTaken = movesMade.length - 1;
-                System.out.println("Number of Actions: " + movesTaken);
-                System.out.println("Nodes Expanded: " + nodesExpanded);
+                System.out.print(movesTaken + "\t");
+                System.out.print(nodesExpanded + "\t");
                 //System.out.println("Series of Actions:");
                 //System.out.println(currLocation.path.trim());
                 this.pathToCSV(currLocation.path, CSV);
