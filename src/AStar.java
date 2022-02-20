@@ -50,8 +50,8 @@ AStar {
                 int movesTaken = movesMade.length - 1;
                 System.out.println("Number of Actions: " + movesTaken);
                 System.out.println("Nodes Expanded: " + nodesExpanded);
-                System.out.println("Series of Actions:");
-                System.out.println(currLocation.path.trim());
+                //System.out.println("Series of Actions:");
+                //System.out.println(currLocation.path.trim());
                 this.pathToCSV(currLocation.path, CSV);
                 break;
             }

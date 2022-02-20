@@ -78,7 +78,7 @@ public class Tester {
         AStar aStar = new AStar();
         aStar.astar(start, goal, board, currHeuristic, CSV);
         long endTime = System.nanoTime();
-        long elapsedTime = (endTime - startTime) / 1000000000;
-        System.out.println(elapsedTime);
+        long elapsedTime = (endTime - startTime) / 1000;
+        System.out.println("elapsed time: " + elapsedTime);
     }
 }
