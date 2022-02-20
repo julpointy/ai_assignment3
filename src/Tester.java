@@ -6,17 +6,13 @@ import java.util.Scanner;
 public class Tester {
     public Tester(int boardwidth, int boardheight, String Filename1, Coordinate start, Coordinate goal, int currHeuristic, File CSV) {
 
-        try {
-            BoardGenerator test = new BoardGenerator();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         //reads the second input as the filename and opens the file
         String Filename = Filename1;
         try {
 
-            File myObj = new File("C:\\Users\\julpo\\Documents\\GitHub\\ai_assignment3\\src\\Boards\\" + Filename);
+            File myObj = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\boards\\" + Filename);
             Scanner myReader = new Scanner(myObj);
             int i = 0;
             //while the file is open, we parse through it to calculate the board size
@@ -39,7 +35,7 @@ public class Tester {
         //We reopen the file to collect the values at each board space to place in a 2x2 array
         Board board = new Board(boardheight, boardwidth);
         try {
-            File myObj = new File("C:\\Users\\julpo\\Documents\\GitHub\\ai_assignment3\\src\\Boards\\" + Filename);
+            File myObj = new File("C:\\Users\\Josh\\Documents\\ai_assignment3\\src\\boards\\" + Filename);
             Scanner myReader = new Scanner(myObj);
             int i = 0;
             while (myReader.hasNextLine()) {
